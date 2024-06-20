@@ -30,13 +30,11 @@ Make sure to provide the necessary options as needed.
 
 ## Library usage
 
-To use Gitlab Agent in your project, follow these steps:
+To use Gitlab Agent in your CLI project, import the library into your code and create an agent.
 
-1. Import the library into your code and create an agent.
+- `authenticate`: attempts to retrieve the encrypted token from storage, and prompts for a decryption password. If no token is present, you will be prompted to create one along with an encryption password.
 
-   - `authenticate`: attempts to retrieve the encrypted token from storage, and prompts for a decryption password. If no token is present, you will be prompted to create one along with an encryption password.
-
-2. After authentication is complete, the `api` property
+2. After authentication is complete, the `api` property exposes a pre-authenticated Gitlab SDK, provided by the [`@gitbeaker/rest`](https://github.com/jdalrymple/gitbeaker/tree/main/packages/rest) library.
 
 ```typescript
 import { createAgent } from 'gitlab-agent'
@@ -45,28 +43,14 @@ async function main() {
   const agent = createAgent()
 
   await agent.authenticate()
+
+  const branches = await agent.api.Branches.all('gitlab-org/gitlab')
 }
 
 main()
 ```
 
-2. Set your Gitlab personal access token:
-
-```javascript
-GitlabAgent.setToken('YOUR_ACCESS_TOKEN')
-```
-
-3. Authenticate with private Gitlab npm repositories:
-
-```javascript
-GitlabAgent.authenticate()
-```
-
-That's it! You are now ready to securely access private Gitlab npm repositories using Gitlab Agent.
-
-## Contributing
-
-We welcome contributions from the community. To contribute to Gitlab Agent, please follow our [contribution guidelines](CONTRIBUTING.md).
+That's it! You are now ready to securely access private Gitlab NPM packages and the Gitlab API using `gitlab-agent`.
 
 ## License
 

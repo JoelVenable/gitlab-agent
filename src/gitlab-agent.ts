@@ -6,6 +6,8 @@ import { LoggerPort } from './ports/logger.port'
 import { UserInterfacePort } from './ports/user-interface.port'
 import { GitlabAgentPort } from './ports/gitlab-agent.port'
 import { checkRange } from './util/range'
+import { ArgumentInvalidException } from './exceptions/ArgumentInvalid.exception'
+import { AgentNotInitializedException } from './exceptions/AgentNotInitialized.exception'
 
 export type GitlabAPI = InstanceType<typeof Gitlab<false>>
 
@@ -35,7 +37,7 @@ class ApiWrapper {
 
   get api() {
     if (!this.#api) {
-      throw new Error('No token set')
+      throw new AgentNotInitializedException()
     }
     return this.#api
   }
@@ -79,7 +81,7 @@ export class GitlabAgent implements GitlabAgentPort {
       name: 'minRotateExpiryDays',
     })
     if (exp < rot) {
-      throw new Error(
+      throw new ArgumentInvalidException(
         'New tokens must expire after the rotation interval. Please adjust the values in your configuration.'
       )
     }

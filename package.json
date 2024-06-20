@@ -7,7 +7,18 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   ],
-  "description": "",
+  "description": "Agent for securely storing and retrieving GitLab credentials",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joelvenable/gitlab-agent"
+  },
+  "bugs": {
+    "url": "https://github.com/joelvenable/gitlab-agent/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/joelvenable/gitlab-agent#readme",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -36,6 +47,7 @@
     "cryptr": "^6.3.0",
     "esbuild": "^0.21.5",
     "rimraf": "^5.0.7",
+    "semantic-release": "^24.0.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.3",
     "typescript": "^5.4.5",
@@ -45,5 +57,13 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   }
 }

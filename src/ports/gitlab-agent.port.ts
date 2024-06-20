@@ -5,5 +5,5 @@ export type GitlabAgentPort = {
   requestToken(): Promise<void>
   rotateToken(): Promise<void>
   plaintextToken: string | null
-  api: GitlabAPI | null
+  api: GitlabAPI
 }
